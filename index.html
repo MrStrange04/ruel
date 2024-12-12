@@ -1,89 +1,291 @@
-<main class="container">
-    <section id="overview" class="section">
-        <h2>Overview</h2>
-        <div class="card">
-            <p>DevOps integrates development and operations teams to enhance collaboration and deliver quality software quickly and efficiently.</p>
-        </div>
-    </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4caf50;
+            --secondary-color: #2e7d32;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-bg: white;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --transition-duration: 0.3s;
+        }
 
-    <section id="roadmap" class="section">
-        <h2>Roadmap</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Beginner</h3>
-                <p>Start with foundational tools like Git, basic scripting, and CI/CD concepts.</p>
-            </div>
-            <div class="card">
-                <h3>Intermediate</h3>
-                <p>Dive into cloud platforms, configuration management, and monitoring tools.</p>
-            </div>
-            <div class="card">
-                <h3>Advanced</h3>
-                <p>Lead automation initiatives, design scalable architectures, and mentor teams.</p>
-            </div>
-        </div>
-    </section>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <section id="responsibilities" class="section">
-        <h2>Responsibilities</h2>
-        <div class="card">
-            <ul>
-                <li>Implementing CI/CD pipelines</li>
-                <li>Monitoring system performance</li>
-                <li>Managing cloud infrastructure</li>
-                <li>Enhancing deployment automation</li>
-            </ul>
-        </div>
-    </section>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
 
-    <section id="skills" class="section">
-        <h2>Skills</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Collaboration</h3>
-                <p>Bridging gaps between teams for seamless workflows.</p>
-            </div>
-            <div class="card">
-                <h3>Cloud Expertise</h3>
-                <p>Proficiency in AWS, Azure, or GCP for scalable solutions.</p>
-            </div>
-            <div class="card">
-                <h3>Automation</h3>
-                <p>Streamlining tasks to enhance efficiency and reduce errors.</p>
-            </div>
-        </div>
-    </section>
+        nav {
+            background: var(--primary-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 5px var(--card-shadow);
+        }
 
-    <section id="tools" class="section">
-        <h2>Tools</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Jenkins</h3>
-                <p>Automate build, test, and deployment pipelines efficiently.</p>
-            </div>
-            <div class="card">
-                <h3>Docker</h3>
-                <p>Containerize applications for consistent deployments.</p>
-            </div>
-            <div class="card">
-                <h3>Kubernetes</h3>
-                <p>Orchestrate and manage containerized applications seamlessly.</p>
-            </div>
-        </div>
-    </section>
+        nav h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
 
-    <section id="what-i-learned" class="section">
-        <h2>What I Learned</h2>
-        <div class="card">
-            <p>Throughout my journey into DevOps, I gained insights into:</p>
-            <ul>
-                <li>The importance of integrating development and operations for faster and more efficient delivery.</li>
-                <li>How CI/CD pipelines streamline the deployment process and improve software quality.</li>
-                <li>The value of containerization with tools like Docker for consistency across environments.</li>
-                <li>The role of Kubernetes in orchestrating and managing containerized applications.</li>
-                <li>The need for monitoring and maintaining cloud infrastructure to ensure system reliability.</li>
-                <li>The significance of collaboration between teams to foster innovation and problem-solving.</li>
-            </ul>
-        </div>
-    </section>
-</main>
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: opacity var(--transition-duration);
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero button {
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background var(--transition-duration);
+        }
+
+        .hero button:hover {
+            background: #1b5e20;
+        }
+
+        .container {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px var(--card-shadow);
+            transition: transform var(--transition-duration);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .card p {
+            font-size: 1rem;
+        }
+
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>DevOps Guide</h1>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#responsibilities">Responsibilities</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#tools">Tools</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h1>Welcome to DevOps</h1>
+        <p>A comprehensive guide to mastering DevOps practices and tools.</p>
+        <button>Learn More</button>
+    </header>
+
+    <main class="container">
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <div class="card">
+                <p>DevOps integrates development and operations teams to enhance collaboration and deliver quality software quickly and efficiently.</p>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <h2>Roadmap</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Beginner</h3>
+                    <p>Start with foundational tools like Git, basic scripting, and CI/CD concepts.</p>
+                </div>
+                <div class="card">
+                    <h3>Intermediate</h3>
+                    <p>Dive into cloud platforms, configuration management, and monitoring tools.</p>
+                </div>
+                <div class="card">
+                    <h3>Advanced</h3>
+                    <p>Lead automation initiatives, design scalable architectures, and mentor teams.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsibilities" class="section">
+            <h2>Responsibilities</h2>
+            <div class="card">
+                <ul>
+                    <li>Implementing CI/CD pipelines</li>
+                    <li>Monitoring system performance</li>
+                    <li>Managing cloud infrastructure</li>
+                    <li>Enhancing deployment automation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Collaboration</h3>
+                    <p>Bridging gaps between teams for seamless workflows.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud Expertise</h3>
+                    <p>Proficiency in AWS, Azure, or GCP for scalable solutions.</p>
+                </div>
+                <div class="card">
+                    <h3>Automation</h3>
+                    <p>Streamlining tasks to enhance efficiency and reduce errors.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="section">
+            <h2>Tools</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Jenkins</h3>
+                    <p>Automate build, test, and deployment pipelines efficiently.</p>
+                </div>
+                <div class="card">
+                    <h3>Docker</h3>
+                    <p>Containerize applications for consistent deployments.</p>
+                </div>
+                <div class="card">
+                    <h3>Kubernetes</h3>
+                    <p>Orchestrate and manage containerized applications seamlessly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-i-learned" class="section">
+            <h2>What I Learned</h2>
+            <div class="card">
+                <p>Throughout my journey into DevOps, I gained insights into:</p>
+                <ul>
+                    <li>The importance of integrating development and operations for faster and more efficient delivery.</li>
+                    <li>How CI/CD pipelines streamline the deployment process and improve software quality.</li>
+                    <li>The value of containerization with tools like Docker for consistency across environments.</li>
+                    <li>The role of Kubernetes in orchestrating and managing containerized applications.</li>
+                    <li>The need for monitoring and maintaining cloud infrastructure to ensure system reliability.</li>
+                    <li>The significance of collaboration between teams to foster innovation and problem-solving.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Ruel &copy; 2024 DevOps Guide | Made with dedication and teamwork</p>
+    </footer>
+</body>
+</html>
