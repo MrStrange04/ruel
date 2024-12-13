@@ -10,18 +10,37 @@
         :root {
             --primary-color: #4caf50;
             --secondary-color: #2e7d32;
-            --background-color: #f4f4f4;
-            --text-color: #333;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
             --card-bg: white;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --border-radius: 10px;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
             --transition-duration: 0.3s;
+            --nav-height: 70px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -29,108 +48,198 @@
             background-color: var(--background-color);
             color: var(--text-color);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         nav {
-            background: var(--primary-color);
-            padding: 1rem;
+            background: rgba(76, 175, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0 2rem;
+            height: var(--nav-height);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
-            box-shadow: 0 2px 5px var(--card-shadow);
+            transition: all var(--transition-duration);
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(76, 175, 80, 0.98);
         }
 
         nav h1 {
             font-size: 1.5rem;
             font-weight: 600;
+            color: white;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-        }
-
-        nav ul li {
-            margin-left: 20px;
+            gap: 2rem;
         }
 
         nav ul li a {
             text-decoration: none;
             color: white;
             font-weight: 500;
-            transition: opacity var(--transition-duration);
+            position: relative;
+            padding: 5px 0;
         }
 
-        nav ul li a:hover {
-            opacity: 0.8;
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width var(--transition-duration);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
         }
 
         .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             padding: 5rem 2rem;
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23FFFFFF" fill-opacity="0.1" d="M0 0h200v200H0z"/></svg>');
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
         }
 
         .hero button {
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary-color);
+            padding: 1rem 2rem;
+            background: white;
             border: none;
             border-radius: var(--border-radius);
-            color: white;
-            font-size: 1rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background var(--transition-duration);
+            transition: all var(--transition-duration);
+            animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
         .hero button:hover {
-            background: #1b5e20;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .container {
-            padding: 3rem 1rem;
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section {
-            margin-bottom: 3rem;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             color: var(--primary-color);
             text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
             padding: 2rem;
             border-radius: var(--border-radius);
-            box-shadow: 0 2px 5px var(--card-shadow);
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition-duration);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
             transition: transform var(--transition-duration);
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
         .card h3 {
@@ -139,39 +248,81 @@
             color: var(--secondary-color);
         }
 
-        .card p {
-            font-size: 1rem;
+        .card p, .card ul {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
         }
 
         footer {
             background: var(--secondary-color);
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
         }
 
         footer p {
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        footer a:hover {
-            text-decoration: none;
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
+            nav {
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-150%);
+                transition: transform var(--transition-duration);
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+            }
+
             .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section h2 {
                 font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
-            nav ul {
-                display: none;
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 4rem 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -179,6 +330,7 @@
 <body>
     <nav>
         <h1>DevOps Guide</h1>
+        <div class="mobile-menu">☰</div>
         <ul>
             <li><a href="#overview">Overview</a></li>
             <li><a href="#roadmap">Roadmap</a></li>
@@ -190,15 +342,15 @@
 
     <header class="hero">
         <h1>Welcome to DevOps</h1>
-        <p>A comprehensive guide to mastering DevOps practices and tools.</p>
-        <button>Learn More</button>
+        <p>A comprehensive guide to mastering DevOps practices and tools for modern software development.</p>
+        <button>Get Started</button>
     </header>
 
     <main class="container">
         <section id="overview" class="section">
             <h2>Overview</h2>
             <div class="card">
-                <p>DevOps integrates development and operations teams to enhance collaboration and deliver quality software quickly and efficiently.</p>
+                <p>DevOps is more than just a methodology—it's a culture that bridges the gap between development and operations, fostering collaboration and efficiency in software delivery. Through automation, continuous integration, and deployment, teams can deliver value faster and more reliably.</p>
             </div>
         </section>
 
@@ -207,85 +359,113 @@
             <div class="grid">
                 <div class="card">
                     <h3>Beginner</h3>
-                    <p>Start with foundational tools like Git, basic scripting, and CI/CD concepts.</p>
+                    <p>Master the fundamentals of version control with Git, learn basic scripting in Python or Bash, and understand CI/CD concepts. Start exploring Linux system administration and cloud basics.</p>
                 </div>
                 <div class="card">
                     <h3>Intermediate</h3>
-                    <p>Dive into cloud platforms, configuration management, and monitoring tools.</p>
+                    <p>Dive deep into cloud platforms like AWS or Azure, learn configuration management tools like Ansible, and master containerization with Docker. Explore monitoring solutions and infrastructure as code.</p>
                 </div>
                 <div class="card">
                     <h3>Advanced</h3>
-                    <p>Lead automation initiatives, design scalable architectures, and mentor teams.</p>
+                    <p>Design and implement complex CI/CD pipelines, orchestrate containers with Kubernetes, and architect scalable cloud solutions. Focus on security best practices and performance optimization.</p>
                 </div>
             </div>
         </section>
 
         <section id="responsibilities" class="section">
-            <h2>Responsibilities</h2>
+            <h2>Core Responsibilities</h2>
             <div class="card">
                 <ul>
-                    <li>Implementing CI/CD pipelines</li>
-                    <li>Monitoring system performance</li>
-                    <li>Managing cloud infrastructure</li>
-                    <li>Enhancing deployment automation</li>
+                    <li>Design and implement efficient CI/CD pipelines</li>
+                    <li>Monitor system performance and reliability</li>
+                    <li>Manage and optimize cloud infrastructure</li>
+                    <li>Automate deployment processes</li>
+                    <li>Ensure system security and compliance</li>
+                    <li>Collaborate with development teams</li>
+                    <li>Implement disaster recovery solutions</li>
                 </ul>
             </div>
         </section>
 
         <section id="skills" class="section">
-            <h2>Skills</h2>
+            <h2>Essential Skills</h2>
             <div class="grid">
                 <div class="card">
                     <h3>Collaboration</h3>
-                    <p>Bridging gaps between teams for seamless workflows.</p>
+                    <p>Foster effective communication between teams, manage stakeholder expectations, and create documentation that bridges knowledge gaps.</p>
                 </div>
                 <div class="card">
                     <h3>Cloud Expertise</h3>
-                    <p>Proficiency in AWS, Azure, or GCP for scalable solutions.</p>
+                    <p>Deep understanding of cloud services, infrastructure as code, and best practices for scalable cloud architecture.</p>
                 </div>
                 <div class="card">
                     <h3>Automation</h3>
-                    <p>Streamlining tasks to enhance efficiency and reduce errors.</p>
+                    <p>Master the art of automating repetitive tasks, creating reliable pipelines, and implementing efficient workflows.</p>
                 </div>
             </div>
         </section>
 
         <section id="tools" class="section">
-            <h2>Tools</h2>
+            <h2>Essential Tools</h2>
             <div class="grid">
                 <div class="card">
                     <h3>Jenkins</h3>
-                    <p>Automate build, test, and deployment pipelines efficiently.</p>
+                    <p>The leading open-source automation server for building, testing, and deploying code with extensive plugin support.</p>
                 </div>
                 <div class="card">
                     <h3>Docker</h3>
-                    <p>Containerize applications for consistent deployments.</p>
+                    <p>Create, deploy, and run applications in containers for consistent environments across development and production.</p>
                 </div>
                 <div class="card">
                     <h3>Kubernetes</h3>
-                    <p>Orchestrate and manage containerized applications seamlessly.</p>
+                    <p>Orchestrate containerized applications at scale with automated deployment, scaling, and management capabilities.</p>
                 </div>
-            </div>
-        </section>
-
-        <section id="what-i-learned" class="section">
-            <h2>What I Learned</h2>
-            <div class="card">
-                <p>Throughout my journey into DevOps, I gained insights into:</p>
-                <ul>
-                    <li>The importance of integrating development and operations for faster and more efficient delivery.</li>
-                    <li>How CI/CD pipelines streamline the deployment process and improve software quality.</li>
-                    <li>The value of containerization with tools like Docker for consistency across environments.</li>
-                    <li>The role of Kubernetes in orchestrating and managing containerized applications.</li>
-                    <li>The need for monitoring and maintaining cloud infrastructure to ensure system reliability.</li>
-                    <li>The significance of collaboration between teams to foster innovation and problem-solving.</li>
-                </ul>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>Ruel &copy; 2024 DevOps Guide | Made with dedication and teamwork</p>
+        <p>Ruel &copy; 2024 DevOps Guide | Empowering teams through automation and collaboration</p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navList = document.querySelector('nav ul');
+        
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Section reveal animation
+        const sections = document.querySelectorAll('.section');
+        
+        const revealSection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        };
+
+        const sectionObserver = new IntersectionObserver(revealSection, {
+            root: null,
+            threshold: 0.15,
+        });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    </script>
 </body>
 </html>
